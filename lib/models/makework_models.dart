@@ -10,8 +10,8 @@ class MakeWorkModel extends Equatable {
   final DateTime? dateJoined;
 
   const MakeWorkModel(
-    this.id, 
-    this.userName, 
+    this.id,
+    this.userName,
     this.email,
     this.firstName,
     this.lastName,
@@ -20,5 +20,6 @@ class MakeWorkModel extends Equatable {
   );
 
   @override
-  List<Object?> get props => [id, dateJoined];
-} 
+  List<Object?> get props =>
+      [id, userName, email, firstName, lastName, dateJoined];
+}
