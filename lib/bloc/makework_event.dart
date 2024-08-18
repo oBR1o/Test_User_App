@@ -12,3 +12,8 @@ class AddEvent extends MakeWorkEvent{
     final DateTime? dateJoined;
     AddEvent(this.id, this.userName, this.email, this.firstName, this.lastName, this.isActive, this.dateJoined);
 }
+
+class RemoveEvent extends MakeWorkEvent{
+    final int id;
+    RemoveEvent({required this.id});
+}

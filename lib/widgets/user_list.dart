@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makework/bloc/app_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:makework/widgets/removealert_dialog.dart';
 
 class UserList extends StatelessWidget {
   const UserList({super.key});
@@ -85,6 +86,7 @@ class UserList extends StatelessWidget {
                         IconButton(
                           icon: const Icon(
                             Icons.edit,
+                            size: 20,
                             color: Colors.black,
                           ),
                           onPressed: () {},
@@ -92,9 +94,18 @@ class UserList extends StatelessWidget {
                         IconButton(
                           icon: const Icon(
                             Icons.delete,
+                            size: 20,
                             color: Colors.black,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return RemoveAlertDialog(
+                                    users: users[index],
+                                  );
+                                });
+                          },
                         ),
                       ],
                     ),
@@ -112,7 +123,7 @@ class UserList extends StatelessWidget {
               FloatingActionButton(
                 onPressed: () {},
                 shape: const CircleBorder(),
-                child: const Icon(Icons.add),
+                child: const Icon(Icons.person_add, color: Colors.black),
               ),
             ],
           ),
