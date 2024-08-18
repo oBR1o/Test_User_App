@@ -6,9 +6,9 @@ class MakeWorkMockRepository extends MakeWorkRepository{
   Future<List<MakeWorkModel>> load() async {
     await Future.delayed(const Duration(seconds: 2));
     return [
-      MakeWorkModel(1, 'test1', 'test1@test.com', 'test1First', 'test1Last', true, DateTime.now()),
-      MakeWorkModel(2, 'test2', 'test2@test.com', 'test2First', 'test2Last', true, DateTime.now()),
-      MakeWorkModel(3, 'test3', 'test3@test.com', 'test3First', 'test3Last', true, DateTime.now()),
+      MakeWorkModel(1, 'test1', 'test1@test.com', 'Firstname1', 'Lastname', true, DateTime.now()),
+      MakeWorkModel(2, 'test2', 'test2@test.com', 'Firstname2', 'Lastname', true, DateTime.now()),
+      MakeWorkModel(3, 'test3', 'test3@test.com', 'Firstname3', 'Lastname', true, DateTime.now()),
     ];
   }
 }

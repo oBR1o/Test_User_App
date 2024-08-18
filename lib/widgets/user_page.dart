@@ -8,14 +8,19 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MakeWorkBloc, MakeWorkState>(
-      builder: (context, state) {
-        return state is LoadingState
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : const UserList();
-      },
+    return Scaffold(
+      appBar:  AppBar(
+        title: const Text('User Page'),
+      ),
+      body: BlocBuilder<MakeWorkBloc, MakeWorkState>(
+        builder: (context, state) {
+          return state is LoadingState
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : const UserList();
+        },
+      ),
     );
   }
 }
