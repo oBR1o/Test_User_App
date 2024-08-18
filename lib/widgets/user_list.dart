@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makework/bloc/app_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:makework/widgets/editalert_dialog.dart';
 import 'package:makework/widgets/removealert_dialog.dart';
 
 class UserList extends StatelessWidget {
@@ -89,7 +90,15 @@ class UserList extends StatelessWidget {
                             size: 20,
                             color: Colors.black,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return EditAlertDialog(
+                                    users: users[index],
+                                  );
+                                });
+                          },
                         ),
                         IconButton(
                           icon: const Icon(

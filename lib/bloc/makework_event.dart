@@ -1,3 +1,5 @@
+import 'package:makework/models/makework_models.dart';
+
 sealed class MakeWorkEvent{}
 
 class LoadEvent extends MakeWorkEvent{}
@@ -16,4 +18,10 @@ class AddEvent extends MakeWorkEvent{
 class RemoveEvent extends MakeWorkEvent{
     final int id;
     RemoveEvent({required this.id});
+}
+
+class EditEvent extends MakeWorkEvent{
+  final MakeWorkModel updatedUser;
+
+  EditEvent({required this.updatedUser});
 }

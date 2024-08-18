@@ -12,4 +12,5 @@ class LoadingState extends MakeWorkState{
 
 class ReadyState extends MakeWorkState{
   ReadyState({required super.users});
+  
 }

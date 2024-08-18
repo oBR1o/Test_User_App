@@ -20,4 +20,11 @@ class MakeWorkMockRepository extends MakeWorkRepository{
     await Future.delayed(const Duration(seconds: 0));
     users.removeWhere((user) => user.id == id);
   }
+
+  @override
+  Future<void> update(MakeWorkModel updatedUser) async {
+    await Future.delayed(const Duration(seconds: 0));
+    final index = users.indexWhere((user) => user.id == updatedUser.id);
+    users[index] = updatedUser;
+  }
 }
