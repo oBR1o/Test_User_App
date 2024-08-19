@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makework/bloc/app_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:makework/widgets/editalert_dialog.dart';
+import 'package:makework/widgets/add_dialog.dart';
+import 'package:makework/widgets/edit_dialog.dart';
 import 'package:makework/widgets/removealert_dialog.dart';
 
 class UserList extends StatelessWidget {
@@ -94,7 +95,7 @@ class UserList extends StatelessWidget {
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return EditAlertDialog(
+                                  return EditDialog(
                                     users: users[index],
                                   );
                                 });
@@ -130,7 +131,14 @@ class UserList extends StatelessWidget {
           child: Column(
             children: [
               FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context){
+                      return const AddDialog();
+                    } 
+                  );
+                },
                 shape: const CircleBorder(),
                 child: const Icon(Icons.person_add, color: Colors.black),
               ),

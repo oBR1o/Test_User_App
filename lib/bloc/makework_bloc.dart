@@ -8,6 +8,7 @@ class MakeWorkBloc extends Bloc<MakeWorkEvent, MakeWorkState>{
     on<LoadEvent>(_onLoaded);
     on<RemoveEvent>(_onRemoved);
     on<EditEvent>(_onEdited);
+    on<AddEvent>(_onAdded);
   }
 
   _onLoaded(LoadEvent event, Emitter<MakeWorkState> emit) async {
@@ -25,6 +26,12 @@ class MakeWorkBloc extends Bloc<MakeWorkEvent, MakeWorkState>{
 
   _onEdited(EditEvent event, Emitter<MakeWorkState> emit) async {
     await repository.update(event.updatedUser);
+    emit(LoadingState());
+    add(LoadEvent());
+  }
+
+  _onAdded(AddEvent event, Emitter<MakeWorkState> emit) async {
+    await repository.add(userName: event.userName, email: event.email, firstName: event.firstName, lastName: event.lastName);
     emit(LoadingState());
     add(LoadEvent());
   }

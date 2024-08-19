@@ -9,6 +9,7 @@ class MakeWorkMockRepository extends MakeWorkRepository{
       MakeWorkModel(3, 'test3', 'test3@test.com', 'Firstname3', 'Lastname', true, DateTime.now()),
     ];
     
+    int lastId = 3;
   @override
   Future<List<MakeWorkModel>> load() async {
     await Future.delayed(const Duration(seconds: 1));
@@ -26,5 +27,14 @@ class MakeWorkMockRepository extends MakeWorkRepository{
     await Future.delayed(const Duration(seconds: 0));
     final index = users.indexWhere((user) => user.id == updatedUser.id);
     users[index] = updatedUser;
+  }
+
+  @override
+  Future<void> add({required String userName, required String email, required String firstName, required String lastName}) async {
+    await Future.delayed(const Duration(seconds: 0));
+    int id = lastId + 1;
+    lastId++;
+    MakeWorkModel newElement = MakeWorkModel(id, userName, email, firstName, lastName, true, DateTime.now());
+    users.add(newElement);
   }
 }

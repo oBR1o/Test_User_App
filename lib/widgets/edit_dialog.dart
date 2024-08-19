@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makework/bloc/app_bloc.dart';
 import 'package:makework/models/makework_models.dart';
 
-class EditAlertDialog extends StatelessWidget {
-  const EditAlertDialog({super.key, required this.users});
+class EditDialog extends StatelessWidget {
+  const EditDialog({super.key, required this.users});
 
   final MakeWorkModel users;
 
