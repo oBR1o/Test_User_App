@@ -7,7 +7,8 @@ class MakeWorkModel extends Equatable {
   final String firstName;
   final String lastName;
   final bool isActive;
-  final DateTime? dateJoined;
+  final String dateJoined;
+  final String image;
 
   const MakeWorkModel(
     this.id,
@@ -17,9 +18,23 @@ class MakeWorkModel extends Equatable {
     this.lastName,
     this.isActive,
     this.dateJoined,
+    this.image,
   );
 
   @override
   List<Object?> get props =>
       [id, userName, email, firstName, lastName, dateJoined];
+  
+  factory MakeWorkModel.fromJson(Map<String, dynamic> json) {
+    return MakeWorkModel(
+      json['id'],
+      json['username'],
+      json['email'],
+      json['first_name'],
+      json['last_name'],
+      json['is_active'],
+      json['date_joined'],
+      json['image'],
+    );
+  }
 }

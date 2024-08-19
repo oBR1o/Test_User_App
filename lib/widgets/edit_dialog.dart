@@ -59,6 +59,7 @@ class EditDialog extends StatelessWidget {
                 lastNameController.text,
                 users.isActive,
                 users.dateJoined,
+                users.image
               );
               context.read<MakeWorkBloc>().add(EditEvent(updatedUser : updatedUser));
               Navigator.of(context).pop();

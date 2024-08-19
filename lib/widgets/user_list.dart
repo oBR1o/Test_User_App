@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makework/bloc/app_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:makework/widgets/add_dialog.dart';
 import 'package:makework/widgets/edit_dialog.dart';
 import 'package:makework/widgets/removealert_dialog.dart';
@@ -74,7 +73,7 @@ class UserList extends StatelessWidget {
                           Text('email: ${users[index].email}'),
                           Text('username: ${users[index].userName}'),
                           Text(
-                              'joined: ${DateFormat('dd/MM/yyyy').format(users[index].dateJoined!)}'),
+                              'joined: ${users[index].dateJoined}}'),
                         ],
                       ),
                     ),

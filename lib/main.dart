@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makework/bloc/app_bloc.dart';
-import 'package:makework/repositories/makework_mock_repository.dart';
-import 'package:makework/widgets/user_page.dart';
+import 'package:makework/repositories/makework_repo_fromdb.dart';
+import 'package:makework/widgets/login_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future main()  async{
+  await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
 
@@ -17,7 +19,7 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider<MakeWorkBloc>(
           create: (context) {
-            final bloc = MakeWorkBloc(MakeWorkMockRepository());
+            final bloc = MakeWorkBloc(MakeWorkRepoFromDB());
             bloc.add(LoadEvent());
             return bloc;
           },
@@ -26,7 +28,7 @@ class MainApp extends StatelessWidget {
       child: const MaterialApp(
         home: Scaffold(
           body: Center(
-            child: UserPage(),
+            child: LoginPage(),
           ),
         ),
       ),

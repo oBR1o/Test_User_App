@@ -4,9 +4,9 @@ import 'package:makework/repositories/makework_repository.dart';
 class MakeWorkMockRepository extends MakeWorkRepository{
 
   List<MakeWorkModel> users = [
-      MakeWorkModel(1, 'test1', 'test1@test.com', 'Firstname1', 'Lastname', true, DateTime.now()),
-      MakeWorkModel(2, 'test2', 'test2@test.com', 'Firstname2', 'Lastname', true, DateTime.now()),
-      MakeWorkModel(3, 'test3', 'test3@test.com', 'Firstname3', 'Lastname', true, DateTime.now()),
+      const MakeWorkModel(1, 'test1', 'test1@test.com', 'Firstname1', 'Lastname', true, '', ''),
+      const MakeWorkModel(2, 'test2', 'test2@test.com', 'Firstname2', 'Lastname', true, '', ''),
+      const MakeWorkModel(3, 'test3', 'test3@test.com', 'Firstname3', 'Lastname', true, '', ''),
     ];
     
     int lastId = 3;
@@ -34,7 +34,7 @@ class MakeWorkMockRepository extends MakeWorkRepository{
     await Future.delayed(const Duration(seconds: 0));
     int id = lastId + 1;
     lastId++;
-    MakeWorkModel newElement = MakeWorkModel(id, userName, email, firstName, lastName, true, DateTime.now());
+    MakeWorkModel newElement = MakeWorkModel(id, userName, email, firstName, lastName, true, '', '');
     users.add(newElement);
   }
 }
