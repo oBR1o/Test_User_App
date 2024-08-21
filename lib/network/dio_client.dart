@@ -44,7 +44,9 @@ class DioClient {
                 final response = await _dio.fetch(error.requestOptions);
 
                 // Resolve all pending requests
-                pendingRequests.forEach((callback) => callback());
+                for (var callback in pendingRequests) {
+                  callback();
+                }
                 pendingRequests.clear();
 
                 isRefreshing = false;
