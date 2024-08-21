@@ -9,7 +9,8 @@ class AddEvent extends MakeWorkEvent{
     final String email;
     final String firstName;
     final String lastName;
-    AddEvent(this.userName, this.email, this.firstName, this.lastName);
+    final String password;
+    AddEvent(this.userName, this.email, this.firstName, this.lastName, this.password);
 }
 
 class RemoveEvent extends MakeWorkEvent{
@@ -19,6 +20,5 @@ class RemoveEvent extends MakeWorkEvent{
 
 class EditEvent extends MakeWorkEvent{
   final MakeWorkModel updatedUser;
-
   EditEvent({required this.updatedUser});
 }

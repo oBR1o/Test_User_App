@@ -1,9 +1,6 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:makework/network/api_server.dart';
 import 'package:makework/widgets/user_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -17,7 +14,45 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool isUserLogin = false;
+  final ApiServer _apiServer = ApiServer();
+
+  Future<void> login() async {
+  bool success = await _apiServer.login(
+    usernameController.text,
+    passwordController.text,
+  );
+  if (success) {
+    changePage();
+    print('Login successful');
+  } else {
+    showErrorDialog('Login failed. Please try again.');
+  }
+}
+
+  void changePage() {
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const UserPage()));
+  }
+
+
+  void showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,82 +80,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => login(context),
+              onPressed: () => login(),
               child: const Text('Login'),
             ),
           ],
         ),
       ),
     );
-  }
-
-  login(context) async {
-    if (kDebugMode) {
-      print("username ${usernameController.text}");
-      print("password ${passwordController.text}");
-    }
-
-    Dio dio = Dio();
-    final String endpoint = dotenv.env['ENDPOINT']!;
-    
-
-    dio.options.receiveTimeout = const Duration(seconds: 20);
-    dio.options.connectTimeout = const Duration(seconds: 20);
-
-    try {
-      Response response = await dio.post('$endpoint/api/token/',
-          data: FormData.fromMap({
-            'username': usernameController.text,
-            'password': passwordController.text,
-          }));
-
-      if (response.statusCode == 200) {
-        print(response);
-        isUserLogin = true;
-
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('token', response.data['access']);
-
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const UserPage()));
-      } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('Login Failed'),
-              content: const Text('Incorrect username or password. Please try again.'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } on DioException catch (e) {
-      print('Error from server : $e');
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Error'),
-            content: const Text('An error occurred. Please try again.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-    }
   }
 }

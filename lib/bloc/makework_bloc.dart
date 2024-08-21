@@ -31,7 +31,7 @@ class MakeWorkBloc extends Bloc<MakeWorkEvent, MakeWorkState>{
   }
 
   _onAdded(AddEvent event, Emitter<MakeWorkState> emit) async {
-    await repository.add(userName: event.userName, email: event.email, firstName: event.firstName, lastName: event.lastName);
+    await repository.add(userName: event.userName, email: event.email, firstName: event.firstName, lastName: event.lastName, password: event.password);
     emit(LoadingState());
     add(LoadEvent());
   }

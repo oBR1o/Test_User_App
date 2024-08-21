@@ -11,13 +11,13 @@ class EditDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController firstNameController =
-        TextEditingController(text: users.firstName);
+        TextEditingController(text: users.first_name);
     TextEditingController lastNameController =
-        TextEditingController(text: users.lastName);
+        TextEditingController(text: users.last_name);
     TextEditingController emailController =
         TextEditingController(text: users.email);
     TextEditingController userNameController =
-        TextEditingController(text: users.userName);
+        TextEditingController(text: users.username);
 
     return AlertDialog(
       title: const Text('Edit User'),
@@ -57,9 +57,10 @@ class EditDialog extends StatelessWidget {
                 emailController.text,
                 firstNameController.text,
                 lastNameController.text,
-                users.isActive,
-                users.dateJoined,
-                users.image
+                users.is_active,
+                users.date_joined,
+                users.image,
+                users.password,
               );
               context.read<MakeWorkBloc>().add(EditEvent(updatedUser : updatedUser));
               Navigator.of(context).pop();

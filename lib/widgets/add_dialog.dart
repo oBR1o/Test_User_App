@@ -11,6 +11,7 @@ class AddDialog extends StatelessWidget {
     var lastNameController = TextEditingController();
     var emailController = TextEditingController();
     var userNameController = TextEditingController();
+    var passwordController = TextEditingController();
     return SimpleDialog(
       title: const Text('Add User'),
       children: [
@@ -34,6 +35,10 @@ class AddDialog extends StatelessWidget {
                 controller: userNameController,
                 decoration: const InputDecoration(labelText: 'Username'),
               ),
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(labelText: 'Password'),
+              ),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 TextButton(
                   onPressed: () {
@@ -47,7 +52,8 @@ class AddDialog extends StatelessWidget {
                     String? lastName = lastNameController.text;
                     String? email = emailController.text;
                     String? userName = userNameController.text;
-                    context.read<MakeWorkBloc>().add(AddEvent(userName,  email, firstName, lastName));
+                    String? password = userNameController.text;
+                    context.read<MakeWorkBloc>().add(AddEvent(userName,  email, firstName, lastName, password));
                     context.read<MakeWorkBloc>().add(LoadEvent());
                     Navigator.pop(context,'save');
                   },

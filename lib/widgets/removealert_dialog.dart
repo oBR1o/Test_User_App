@@ -15,7 +15,7 @@ class RemoveAlertDialog extends StatelessWidget {
     return AlertDialog(
       title: const Text('Confirm Delete'),
       content: Text(
-          'Do you want to delete "${users.userName}" ?'),
+          'Do you want to delete "${users.username}" ?'),
       actions:[
         TextButton(
           child: const Text('Cancle'),

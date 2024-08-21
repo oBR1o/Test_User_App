@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:makework/bloc/app_bloc.dart';
 import 'package:makework/widgets/add_dialog.dart';
 import 'package:makework/widgets/edit_dialog.dart';
@@ -66,20 +67,20 @@ class UserList extends StatelessWidget {
                         ],
                       ),
                       title: Text(
-                          '${users[index].firstName} ${users[index].lastName}'),
+                          '${users[index].first_name} ${users[index].last_name}'),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('email: ${users[index].email}'),
-                          Text('username: ${users[index].userName}'),
+                          Text('username: ${users[index].username}'),
                           Text(
-                              'joined: ${users[index].dateJoined}}'),
+                              'joined: ${DateFormat('yyyy-MM-dd HH:mm:ss').format(users[index].date_joined!)}'),
                         ],
                       ),
                     ),
                   ),
                   Positioned(
-                    bottom: 0,
+                    top: 0,
                     right: 10,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
