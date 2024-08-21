@@ -37,4 +37,16 @@ class ApiServer {
       return false;
     }
   }
-}
+
+  Future<void> logout() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('access');
+      
+      print('Logout successful');
+    } catch (e) {
+      print('Logout failed: $e');
+    }
+  }
+  }
+

@@ -20,24 +20,24 @@ class AddDialog extends StatelessWidget {
           child: Column(
             children: [
               TextField(
-                controller: firstNameController,
-                decoration: const InputDecoration(labelText: 'First Name'),
-              ),
-              TextField(
-                controller: lastNameController,
-                decoration: const InputDecoration(labelText: 'Last Name'),
-              ),
-              TextField(
-                controller: emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
-              ),
-              TextField(
                 controller: userNameController,
                 decoration: const InputDecoration(labelText: 'Username'),
               ),
               TextField(
                 controller: passwordController,
                 decoration: const InputDecoration(labelText: 'Password'),
+              ),
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+              ),
+              TextField(
+                controller: firstNameController,
+                decoration: const InputDecoration(labelText: 'First Name'),
+              ),
+              TextField(
+                controller: lastNameController,
+                decoration: const InputDecoration(labelText: 'Last Name'),
               ),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 TextButton(
@@ -48,14 +48,15 @@ class AddDialog extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    String? firstName = firstNameController.text;
-                    String? lastName = lastNameController.text;
-                    String? email = emailController.text;
                     String? userName = userNameController.text;
                     String? password = userNameController.text;
-                    context.read<MakeWorkBloc>().add(AddEvent(userName,  email, firstName, lastName, password));
+                    String? email = emailController.text;
+                    String? firstName = firstNameController.text;
+                    String? lastName = lastNameController.text;
+                    context.read<MakeWorkBloc>().add(AddEvent(
+                        userName, email, firstName, lastName, password));
                     context.read<MakeWorkBloc>().add(LoadEvent());
-                    Navigator.pop(context,'save');
+                    Navigator.pop(context, 'save');
                   },
                   child: const Text('Add'),
                 ),

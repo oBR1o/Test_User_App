@@ -17,22 +17,22 @@ class _LoginPageState extends State<LoginPage> {
   final ApiServer _apiServer = ApiServer();
 
   Future<void> login() async {
-  bool success = await _apiServer.login(
-    usernameController.text,
-    passwordController.text,
-  );
-  if (success) {
-    changePage();
-    print('Login successful');
-  } else {
-    showErrorDialog('Login failed. Please try again.');
+    bool success = await _apiServer.login(
+      usernameController.text,
+      passwordController.text,
+    );
+    if (success) {
+      changePage();
+      print('Login successful');
+    } else {
+      showErrorDialog('Login failed. Please try again.');
+    }
   }
-}
 
   void changePage() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const UserPage()));
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => UserPage()));
   }
-
 
   void showErrorDialog(String message) {
     showDialog(
@@ -58,10 +58,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login Page'),
+        title: const Center(
+          child: Text('Login'),
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(30.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

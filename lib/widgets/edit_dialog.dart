@@ -10,14 +10,16 @@ class EditDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController userNameController =
+        TextEditingController(text: users.username);
+    TextEditingController passwordController =
+        TextEditingController(text: users.password);
+    TextEditingController emailController =
+        TextEditingController(text: users.email);
     TextEditingController firstNameController =
         TextEditingController(text: users.first_name);
     TextEditingController lastNameController =
         TextEditingController(text: users.last_name);
-    TextEditingController emailController =
-        TextEditingController(text: users.email);
-    TextEditingController userNameController =
-        TextEditingController(text: users.username);
 
     return AlertDialog(
       title: const Text('Edit User'),
@@ -25,20 +27,24 @@ class EditDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
-            controller: firstNameController,
-            decoration: const InputDecoration(labelText: 'First Name'),
+            controller: userNameController,
+            decoration: const InputDecoration(labelText: 'Username'),
           ),
           TextField(
-            controller: lastNameController,
-            decoration: const InputDecoration(labelText: 'Last Name'),
+            controller: passwordController,
+            decoration: const InputDecoration(labelText: 'Passsword'),
           ),
           TextField(
             controller: emailController,
             decoration: const InputDecoration(labelText: 'Email'),
           ),
           TextField(
-            controller: userNameController,
-            decoration: const InputDecoration(labelText: 'Username'),
+            controller: firstNameController,
+            decoration: const InputDecoration(labelText: 'First Name'),
+          ),
+          TextField(
+            controller: lastNameController,
+            decoration: const InputDecoration(labelText: 'Last Name'),
           ),
         ],
       ),
@@ -60,9 +66,11 @@ class EditDialog extends StatelessWidget {
                 users.is_active,
                 users.date_joined,
                 users.image,
-                users.password,
+                passwordController.text,
               );
-              context.read<MakeWorkBloc>().add(EditEvent(updatedUser : updatedUser));
+              context
+                  .read<MakeWorkBloc>()
+                  .add(EditEvent(updatedUser: updatedUser));
               Navigator.of(context).pop();
             },
             child: const Text('Save'))
