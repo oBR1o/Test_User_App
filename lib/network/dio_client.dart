@@ -4,8 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DioClient {
   late Dio _dio;
-  bool isRefreshing = false; // Flag to prevent multiple refreshes
-  List<Function> pendingRequests = []; // Queue for pending requests
+  bool isRefreshing = false;
+  List<Function> pendingRequests = [];
 
   DioClient() {
     _dio = Dio();
@@ -31,19 +31,16 @@ class DioClient {
           if (error.response?.statusCode == 401 && !isRefreshing) {
             isRefreshing = true;
 
+            // จัดการการหมดอายุของ access token 
             try {
-              final newTokens = await refreshToken();
+              final newTokens = await refreshToken(); 
               if (newTokens != null) {
-                final prefs = await SharedPreferences.getInstance();
+                final prefs = await SharedPreferences.getInstance();     // เก็บ access tolen ลงใน local storage ใหม่
                 await prefs.setString('access', newTokens['access']?? '');
                 await prefs.setString('REFRESH_TOKEN', newTokens['refresh']?? '');
-
-                // Update the failed request with the new token and retry
                 error.requestOptions.headers['Authorization'] =
                     'Bearer ${newTokens['access']}';
                 final response = await _dio.fetch(error.requestOptions);
-
-                // Resolve all pending requests
                 for (var callback in pendingRequests) {
                   callback();
                 }
@@ -60,7 +57,6 @@ class DioClient {
               return handler.reject(error);
             }
           } else if (isRefreshing) {
-            // Queue requests while refreshing
             pendingRequests.add(() async {
               final token = await getAccessToken();
               if (token != null) {

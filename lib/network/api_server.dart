@@ -16,13 +16,11 @@ class ApiServer {
           'password': password,
         },
       );
-
-      // ตรวจสอบว่าการ login สำเร็จหรือไม่
       if (response.statusCode == 200) {
         // รับ accessToken จาก response
         String accessToken = response.data['access'];
 
-        // เก็บ accessToken ใน SharedPreferences
+        // เก็บ accessToken ใน local Storage 
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('access', accessToken);
 
@@ -40,6 +38,8 @@ class ApiServer {
 
   Future<void> logout() async {
     try {
+
+      // ลบ access token ออกเมิ่อ log out
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('access');
       
